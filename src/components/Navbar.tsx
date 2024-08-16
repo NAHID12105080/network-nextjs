@@ -1,5 +1,5 @@
 import Link from "next/link";
-import MobileMenu from "./MobileMenu";
+
 import Image from "next/image";
 import {
   ClerkLoaded,
@@ -9,13 +9,15 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 
+import MobileMenu from "./MobileMenu";
+
 const Navbar = () => {
   return (
     <div className="h-24 flex items-center justify-between">
       {/* LEFT */}
       <div className="md:hidden lg:block w-[20%]">
         <Link href="/" className="font-bold text-xl text-blue-600">
-         Network
+          NETWORK
         </Link>
       </div>
       {/* CENTER */}
@@ -83,7 +85,7 @@ const Navbar = () => {
             </div>
           </SignedOut>
         </ClerkLoaded>
-        <MobileMenu />
+      <MobileMenu/>
       </div>
     </div>
   );
