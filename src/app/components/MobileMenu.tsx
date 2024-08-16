@@ -1,64 +1,43 @@
-'use client'
-import React, { useState } from "react"
- 
-import {
-    Sheet,
-    SheetContent,
-    
-    SheetTrigger,
-  } from "@/components/ui/sheet"
-import Link from "next/link"
+"use client";
 
-import { MobileNavItems } from "@/lib/constants"
+import Link from "next/link";
+import { useState } from "react";
 
-
-const MobileMenu: React.FC = () => {
-  const [open, setOpen] = useState(false)
-
-  const handleToggle = () => {
-    setOpen((prev) => !prev)
-  }
-
+const MobileMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div>
-      <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger asChild>
-          <button
-            className="flex flex-col gap-1.5 cursor-pointer"
-            onClick={handleToggle}
-          >
-            {/* First Dash */}
-            <div
-              className={`w-6 h-1 bg-blue-500 rounded-sm transition-transform ${
-                open ? "transform rotate-45 translate-y-2 origin-left" : ""
-              }`}
-            />
-            {/* Middle Dash */}
-            <div
-              className={`w-6 h-1 bg-blue-500 rounded-sm transition-opacity ${
-                open ? "opacity-0" : "opacity-100"
-              }`}
-            />
-            {/* Last Dash */}
-            <div
-              className={`w-6 h-1 bg-blue-500 rounded-sm transition-transform ${
-                open ? "transform -rotate-45 -translate-y-2 origin-left" : ""
-              }`}
-            />
-          </button>
-        </SheetTrigger>
-        <SheetContent>
-        {MobileNavItems.map((item, index) => (
-          <li key={index}>
-            <Link href={item.url} className="text-lg font-medium text-blue-600 hover:text-blue-800 transition-colors">
-              {item.title}
-            </Link>
-          </li>
-        ))}
-        </SheetContent>
-      </Sheet>
+    <div className="md:hidden">
+      <div
+        className="flex flex-col gap-[4.5px] cursor-pointer"
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        <div
+          className={`w-6 h-1 bg-blue-500 rounded-sm ${
+            isOpen ? "rotate-45" : ""
+          } origin-left ease-in-out duration-500`}
+        />
+        <div
+          className={`w-6 h-1 bg-blue-500 rounded-sm ${
+            isOpen ? "opacity-0" : ""
+          } ease-in-out duration-500`}
+        />
+        <div
+          className={`w-6 h-1 bg-blue-500 rounded-sm ${
+            isOpen ? "-rotate-45" : ""
+          } origin-left ease-in-out duration-500`}
+        />
+      </div>
+      {isOpen && (
+        <div className="absolute text-blue-500 hover:text-blue-600 left-0 top-24 w-full h-[calc(100vh-96px)] bg-white flex flex-col items-center justify-center gap-8 font-medium text-xl z-10">
+          <Link href="/">Home</Link>
+          <Link href="/">Friends</Link>
+          <Link href="/">Groups</Link>
+          <Link href="/">Stories</Link>
+          <Link href="/">Login</Link>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default MobileMenu
+export default MobileMenu;
